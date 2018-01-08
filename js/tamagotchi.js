@@ -45,14 +45,18 @@ export class Tamagotchi{
   }
 
   feed(){
-    this.foodLevel = 10;
+    if (!this.isDead()){
+      this.foodLevel = 10;
+    } else {
+      return false;
+    }
   }
 
   play(){
     this.moodLevel = 10;
   }
 
-  sleep(){
+  nap(){
     this.restLevel = 10;
   }
 

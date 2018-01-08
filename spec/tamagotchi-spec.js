@@ -59,5 +59,29 @@ describe('Tamagotchi', function() {
     expect(choo.foodLevel).toEqual(10);
   });
 
+  it('should have a moodLevel of 10 if you play with it', function(){
+    jasmine.clock().tick(9001);
+    expect(choo.moodLevel).toEqual(1);
+    choo.play();
+    expect(choo.moodLevel).toEqual(10);
+  });
+
+  it('should have a restLevel of 10 if it takes a nap', function(){
+    jasmine.clock().tick(9001);
+    expect(choo.restLevel).toEqual(1);
+    choo.nap();
+    expect(choo.restLevel).toEqual(10);
+  });
+
+  it('should be able to be fed if it is already dead', function(){
+    jasmine.clock().tick(10001);
+    //make sure tamagotchi is dead after 10 seconds without feeding
+    expect(choo.isDead()).toEqual(true);
+    //make sure the feed() method fails and returns false
+    expect(choo.feed()).toEqual(false);
+    //make sure the dead tamagotchi has not been fed
+    expect(choo.foodLevel).toEqual(0);
+
+  });
 
 });
