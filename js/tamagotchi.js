@@ -8,15 +8,14 @@ export class Tamagotchi{
     //make pet sleep to increase restLevel
     this.restLevel = 10;
   }
-  setHunger(){
 
+  //set each level to decrease at a rate of 1 pt per second
+  setNeedLevel(){
+    setInterval(() => {
+      this.foodLevel--;
+      this.moodLevel--;
+      this.restLevel--;
+    }, 1000);
   }
 
-  setSadness(){
-
-  }
-
-  setExhaustion(){
-
-  }
 }
