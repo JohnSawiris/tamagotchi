@@ -15,7 +15,7 @@ export class Tamagotchi{
       this.foodLevel--;
       this.moodLevel--;
       this.restLevel--;
-    }, 1000);
+    }, 2000);
   }
 
   check(arg) {
@@ -48,6 +48,7 @@ export class Tamagotchi{
     return (food) => {
       if (!this.isDead()){
         this.foodLevel += amt;
+        console.log("choo was fed");
         return `${this.name} ate the ${food}! Food level goes up by ${amt}!`
       } else {
         return false;
