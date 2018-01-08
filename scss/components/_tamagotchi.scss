@@ -26,8 +26,10 @@
 }
 
 .tamagotchi-controls{
+  height: 125px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 
   button {
     font-size: 0.8em;
@@ -55,6 +57,9 @@
     &:active {
       border: none;
       outline: none;
+    }
+    &:nth-child(2){
+      align-self: flex-end;
     }
   }
 }
