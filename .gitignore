@@ -3,3 +3,4 @@ build/
 tmp/
 *.css.map
 .sass-cache/
+bower_components/
