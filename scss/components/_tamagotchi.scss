@@ -1,0 +1,29 @@
+.tamagotchi-game{
+  padding-top: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: pink;
+  border-radius: 300px 300px 100px 100px;
+  width: 600px;
+  height: 700px;
+
+  h1{
+    margin-bottom: 20px;
+  }
+  .tamagotchi-display{
+    border-radius: 20px;
+    background-color: #eee;
+    height: 400px;
+    width: 400px;
+  }
+}
+
+.tamagotchi-controls{
+  display: flex;
+  justify-content: center;
+
+  button {
+    margin: 15px 15px;
+  }
+}
