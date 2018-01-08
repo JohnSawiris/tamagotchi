@@ -44,20 +44,37 @@ export class Tamagotchi{
     return tiredCheck();
   }
 
-  feed(){
-    if (!this.isDead()){
-      this.foodLevel = 10;
-    } else {
-      return false;
+  feed(amt){
+    return (food) => {
+      if (!this.isDead()){
+        this.foodLevel += amt;
+        return `${this.name} ate the ${food}! Food level goes up by ${amt}!`
+      } else {
+        return false;
+      }
     }
   }
 
-  play(){
-    this.moodLevel = 10;
+  play(amt){
+    return (nameOfTheGame) => {
+      if(!this.isDead()) {
+        this.moodLevel += amt;
+        return `${this.name} played ${nameOfTheGame}! Mood level goes up by ${amt}!`;
+      } else {
+          return false;
+      }
+    }
   }
 
-  nap(){
-    this.restLevel = 10;
+  nap(amt){
+    return (nap) => {
+      if(!this.isDead()) {
+        this.restLevel += amt;
+        return `${this.name} took a ${nap}! Rest level goes up by ${amt}!`;
+      } else {
+        return false;
+      }
+    }
   }
 
 }

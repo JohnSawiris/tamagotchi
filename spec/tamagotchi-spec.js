@@ -55,32 +55,60 @@ describe('Tamagotchi', function() {
   it('should have a foodLevel of 10 if it is fed', function(){
     jasmine.clock().tick(9001);
     expect(choo.foodLevel).toEqual(1);
-    choo.feed();
-    expect(choo.foodLevel).toEqual(10);
+    choo.eatSmall = choo.feed(5);
+    choo.eatSmall("blueberries");
+    expect(choo.foodLevel).toEqual(6);
   });
 
   it('should have a moodLevel of 10 if you play with it', function(){
     jasmine.clock().tick(9001);
     expect(choo.moodLevel).toEqual(1);
-    choo.play();
-    expect(choo.moodLevel).toEqual(10);
+    choo.litteGame = choo.play(4);
+    choo.litteGame('xBox');
+    expect(choo.moodLevel).toEqual(5);
   });
 
   it('should have a restLevel of 10 if it takes a nap', function(){
     jasmine.clock().tick(9001);
     expect(choo.restLevel).toEqual(1);
-    choo.nap();
+    choo.longNap = choo.nap(9);
+    choo.longNap('short nap');//it gives choo a long nap
     expect(choo.restLevel).toEqual(10);
   });
 
-  it('should be able to be fed if it is already dead', function(){
+  it('should not be able to be fed if it is already dead', function(){
     jasmine.clock().tick(10001);
     //make sure tamagotchi is dead after 10 seconds without feeding
     expect(choo.isDead()).toEqual(true);
     //make sure the feed() method fails and returns false
-    expect(choo.feed()).toEqual(false);
+    choo.feedSmall = choo.feed(5);
+    expect(choo.feedSmall("human flesh")).toEqual(false);
     //make sure the dead tamagotchi has not been fed
     expect(choo.foodLevel).toEqual(0);
+
+  });
+
+  it('should not be able to play if it is already dead', function(){
+    jasmine.clock().tick(10001);
+    //make sure tamagotchi is dead after 10 seconds without feeding
+    expect(choo.isDead()).toEqual(true);
+    //make sure the feed() method fails and returns false
+    choo.bigGame = choo.play(9);
+    expect(choo.bigGame('xBox')).toEqual(false);
+    //make sure the dead tamagotchi has not been fed
+    expect(choo.moodLevel).toEqual(0);
+
+  });
+
+  it('should not be able to nap if it is already dead', function(){
+    jasmine.clock().tick(10001);
+    //make sure tamagotchi is dead after 10 seconds without feeding
+    expect(choo.isDead()).toEqual(true);
+    //make sure the feed() method fails and returns false
+    choo.shortNap = choo.nap(5);
+    expect(choo.shortNap()).toEqual(false);
+    //make sure the dead tamagotchi has not been fed
+    expect(choo.restLevel).toEqual(0);
 
   });
 
