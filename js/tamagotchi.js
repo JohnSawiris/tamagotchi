@@ -18,4 +18,42 @@ export class Tamagotchi{
     }, 1000);
   }
 
+  check(arg) {
+
+    return () => {
+      if(arg <= 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  isDead() {
+    const deadCheck = this.check(this.foodLevel);
+    return deadCheck();
+  }
+
+  isBored() {
+    const boredCheck = this.check(this.moodLevel);
+    return boredCheck();
+  }
+
+  isExhausted() {
+    const tiredCheck = this.check(this.restLevel);
+    return tiredCheck();
+  }
+
+  feed(){
+    this.foodLevel = 10;
+  }
+
+  play(){
+    this.moodLevel = 10;
+  }
+
+  sleep(){
+    this.restLevel = 10;
+  }
+
 }

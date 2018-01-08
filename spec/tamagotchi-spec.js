@@ -31,20 +31,32 @@ describe('Tamagotchi', function() {
     expect(choo.restLevel).toEqual(7);
   });
 
-  it('should', function(){
-
+  it('should die if foodLevel drops to or below zero', function(){
+    choo.foodLevel = 0;
+    expect(choo.isDead()).toEqual(true);
+    choo.foodLevel = -1;
+    expect(choo.isDead()).toEqual(true);
   });
 
-  it('should', function(){
-
+  it('should be bored if moodLevel drops below zero', function(){
+    choo.moodLevel = 0;
+    expect(choo.isBored()).toEqual(true);
+    choo.moodLevel = -1;
+    expect(choo.isBored()).toEqual(true);
   });
 
-  it('should', function(){
-
+  it('should be exhausted if restLevel drops below zero', function(){
+    choo.restLevel = 0;
+    expect(choo.isExhausted()).toEqual(true);
+    choo.restLevel = -1;
+    expect(choo.isExhausted()).toEqual(true);
   });
 
-  it('should', function(){
-
+  it('should have a foodLevel of 10 if it is fed', function(){
+    jasmine.clock().tick(9001);
+    expect(choo.foodLevel).toEqual(1);
+    choo.feed();
+    expect(choo.foodLevel).toEqual(10);
   });
 
 
