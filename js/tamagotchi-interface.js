@@ -14,7 +14,7 @@ $(document).ready(function(){
 
   $('#feed').click(function() {
     const eatDinner = choo.feed(10);
-    console.log(eatDinner("dinner"));
+    console.log(eatDinner("mushrooms"));
   });//feed end
 
   $('#play').click(function() {
