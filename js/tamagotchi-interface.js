@@ -1,5 +1,5 @@
 import { Tamagotchi } from './../js/tamagotchi.js';
-
+import { getWeatherData } from './../js/weather.js';
 
 $(document).ready(function(){
   let choo = new Tamagotchi("Choo");
@@ -26,4 +26,16 @@ $(document).ready(function(){
     sleep();
   });//sleep end
 
+  $('#weather-form').submit(function(event) {
+    event.preventDefault();
+
+    let userInput = $("#location").val();
+    console.log(`userInput = ${userInput}`);
+    getWeatherData(userInput, displayData);
+  });
+
 });//ready end
+
+function displayData(condition) {
+  $('#weather').text(condition);
+}

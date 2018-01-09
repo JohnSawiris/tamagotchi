@@ -9,9 +9,16 @@
   </head>
   <body>
     <div class="container">
-      <div class="weather-repoter">
-        <h2>Weather</h2>
-        <p id="weather"></p>
+      <div class="weather-reporter">
+        <form  id="weather-form">
+          <div class="form-group">
+            <label for="weather">Weather</label>
+            <input type="text" id="location" class="form-control" name="" value="">
+            <button type="submit" class="btn btn-primary" name="button">Submit</button>
+          </div>
+        </form>
+        <ul id="weather">
+        </ul>
       </div>
       <div class="tamagotchi-game">
         <h1>VIRTUAL PET</h1>
