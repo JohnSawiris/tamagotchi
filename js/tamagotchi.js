@@ -7,19 +7,43 @@ export class Tamagotchi{
     this.moodLevel = 10;
     //make pet sleep to increase restLevel
     this.restLevel = 10;
+    this.hungerMod = 0;
   }
 
   //set each level to decrease at a rate of 1 pt per second
   setNeedLevel(){
+
     setInterval(() => {
-      this.foodLevel--;
-      this.moodLevel--;
-      this.restLevel--;
+      if(this.moodLevel > 0) {
+        this.moodLevel--;
+      }
     }, 2000);
+    setInterval(() => {
+      if(this.restLevel > 0) {
+        this.restLevel--;
+      }
+    }, 5000);
+    setInterval(() => {
+      if(this.isBored() && this.isExhausted()) {
+        this.hungerMod = 2;
+      } else if (this.isBored() || this.isExhausted()) {
+        this.hungerMod = 1;
+      } else {
+        this.hungerMod = 0;
+      }
+
+      if(this.foodLevel > 0) {
+        if (this.foodLevel < this.hungerMod+1){
+          this.foodLevel = 0;
+        } else {
+          this.foodLevel -= 1 + this.hungerMod;
+        }
+      }
+
+    }, 8000);
   }
 
   check(arg) {
-
     return () => {
       if(arg <= 0) {
         return true;

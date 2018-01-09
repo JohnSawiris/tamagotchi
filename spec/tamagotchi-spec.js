@@ -24,11 +24,19 @@ describe('Tamagotchi', function() {
     expect(choo.restLevel).toEqual(10);
   });
 
-  it('should have a foodLevel, moodLevel, and restLevel of 7 after 3001 ms', function(){
-    jasmine.clock().tick(3001);
-    expect(choo.foodLevel).toEqual(7);
-    expect(choo.moodLevel).toEqual(7);
-    expect(choo.restLevel).toEqual(7);
+  it('should have a moodLevel of 0 after 20 seconds', function(){
+    jasmine.clock().tick(20001);
+    expect(choo.moodLevel).toEqual(0);
+  });
+
+  it('should have a restLevel of 0 after 50 seconds', function(){
+    jasmine.clock().tick(50001);
+    expect(choo.restLevel).toEqual(0);
+  });
+
+  it('should have a foodLevel of 0 after 48001 ms', function(){
+    jasmine.clock().tick(48001);
+    expect(choo.foodLevel).toEqual(0);
   });
 
   it('should die if foodLevel drops to or below zero', function(){
@@ -52,24 +60,24 @@ describe('Tamagotchi', function() {
     expect(choo.isExhausted()).toEqual(true);
   });
 
-  it('should have a foodLevel of 10 if it is fed', function(){
-    jasmine.clock().tick(9001);
-    expect(choo.foodLevel).toEqual(1);
+  it('should increase the foodLevel by the amount it is fed ', function(){
+    jasmine.clock().tick(8001);
+    expect(choo.foodLevel).toEqual(9);
     choo.eatSmall = choo.feed(5);
     choo.eatSmall("blueberries");
-    expect(choo.foodLevel).toEqual(6);
+    expect(choo.foodLevel).toEqual(14);
   });
 
-  it('should have a moodLevel of 10 if you play with it', function(){
-    jasmine.clock().tick(9001);
+  it('should increase the moodLevel by the amount it is played', function(){
+    jasmine.clock().tick(18001);
     expect(choo.moodLevel).toEqual(1);
     choo.litteGame = choo.play(4);
     choo.litteGame('xBox');
     expect(choo.moodLevel).toEqual(5);
   });
 
-  it('should have a restLevel of 10 if it takes a nap', function(){
-    jasmine.clock().tick(9001);
+  it('should increase the restLevel by the amount it sleeps', function(){
+    jasmine.clock().tick(45001);
     expect(choo.restLevel).toEqual(1);
     choo.longNap = choo.nap(9);
     choo.longNap('short nap');//it gives choo a long nap
@@ -77,7 +85,7 @@ describe('Tamagotchi', function() {
   });
 
   it('should not be able to be fed if it is already dead', function(){
-    jasmine.clock().tick(10001);
+    jasmine.clock().tick(48001);
     //make sure tamagotchi is dead after 10 seconds without feeding
     expect(choo.isDead()).toEqual(true);
     //make sure the feed() method fails and returns false
@@ -89,7 +97,7 @@ describe('Tamagotchi', function() {
   });
 
   it('should not be able to play if it is already dead', function(){
-    jasmine.clock().tick(10001);
+    jasmine.clock().tick(48001);
     //make sure tamagotchi is dead after 10 seconds without feeding
     expect(choo.isDead()).toEqual(true);
     //make sure the feed() method fails and returns false
@@ -101,7 +109,7 @@ describe('Tamagotchi', function() {
   });
 
   it('should not be able to nap if it is already dead', function(){
-    jasmine.clock().tick(10001);
+    jasmine.clock().tick(50001);
     //make sure tamagotchi is dead after 10 seconds without feeding
     expect(choo.isDead()).toEqual(true);
     //make sure the feed() method fails and returns false
@@ -110,6 +118,14 @@ describe('Tamagotchi', function() {
     //make sure the dead tamagotchi has not been fed
     expect(choo.restLevel).toEqual(0);
 
+  });
+
+  it('should lose 3 hunger per tick if isBored and isExhausted', function() {
+    choo.moodLevel = 0;
+    choo.restLevel = 0;
+    expect(choo.foodLevel).toEqual(10);
+    jasmine.clock().tick(8001);
+    expect(choo.foodLevel).toEqual(7);
   });
 
 });
